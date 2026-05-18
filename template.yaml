@@ -30,7 +30,7 @@ Resources:
               StringEquals:
                 "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
               StringLike:
-                "token.actions.githubusercontent.com:sub": "repo:alfreddey/aws-ecr-ecs:ref:refs/heads/main"
+                "token.actions.githubusercontent.com:sub": "repo:alfreddey/aws-ecr:ref:refs/heads/main"
       Description: Role for GitHub Actions to assum
 
   ECRRepository: 
