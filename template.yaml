@@ -57,4 +57,4 @@ Resources:
   ECRRepository:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: "test-repository"
+      RepositoryName: "alfreddey_guess_game"
