@@ -32,6 +32,27 @@ Resources:
               StringLike:
                 "token.actions.githubusercontent.com:sub": "repo:alfreddey/aws-ecr:ref:refs/heads/main"
       Description: Role for GitHub Actions to assume
+      Policies:
+        - PolicyName: ECRPushPullPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: AllowECRAuth
+                Effect: Allow
+                Action:
+                  - "ecr:GetAuthorizationToken"
+                Resource: "*"
+              - Sid: AllowECRPushPull
+                Effect: Allow
+                Action:
+                  - "ecr:GetDownloadUrlForLayer"
+                  - "ecr:BatchGetImage"
+                  - "ecr:BatchCheckLayerAvailability"
+                  - "ecr:PutImage"
+                  - "ecr:InitiateLayerUpload"
+                  - "ecr:UploadLayerPart"
+                  - "ecr:CompleteLayerUpload"
+                Resource: !GetAtt ECRRepository.Arn
 
   ECRRepository: 
     Type: AWS::ECR::Repository
