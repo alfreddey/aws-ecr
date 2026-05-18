@@ -54,23 +54,7 @@ Resources:
                   - "ecr:CompleteLayerUpload"
                 Resource: !GetAtt ECRRepository.Arn
 
-  ECRRepository: 
+  ECRRepository:
     Type: AWS::ECR::Repository
-    Properties: 
+    Properties:
       RepositoryName: "test-repository"
-      RepositoryPolicyText: 
-        Version: "2012-10-17"
-        Statement: 
-          - Sid: AllowPushPull
-            Effect: Allow
-            Principal: 
-              AWS: 
-                - !GetAtt GitHubActionsServiceRole.Arn
-            Action: 
-              - "ecr:GetDownloadUrlForLayer"
-              - "ecr:BatchGetImage"
-              - "ecr:BatchCheckLayerAvailability"
-              - "ecr:PutImage"
-              - "ecr:InitiateLayerUpload"
-              - "ecr:UploadLayerPart"
-              - "ecr:CompleteLayerUpload"
