@@ -1,50 +1,47 @@
 <%- include('partials/header', { title: 'Guess the Number' }) %>
 
-<main class="game">
-  <h1>Guess the Number</h1>
-  <p class="prompt">I'm thinking of a number between <%= range.min %> and <%= range.max %>.</p>
+  <main class="game">
+    <h1>Guess the Number V2</h1>
+    <p class="prompt">I'm thinking of a number between <%= range.min %> and <%= range.max %>.</p>
 
-  <% if (state.lastMessage) { %>
-    <div class="message message-<%= state.lastMessage.type %>">
-      <%= state.lastMessage.text %>
-    </div>
-  <% } %>
+    <% if (state.lastMessage) { %>
+      <div class="message message-<%= state.lastMessage.type %>">
+        <%= state.lastMessage.text %>
+      </div>
+      <% } %>
 
-  <% if (!state.won) { %>
-    <form method="POST" action="/guess" class="guess-form">
-      <label for="guess">Your guess</label>
-      <input
-        type="number"
-        id="guess"
-        name="guess"
-        min="<%= range.min %>"
-        max="<%= range.max %>"
-        required
-        autofocus
-      >
-      <button type="submit">Guess</button>
-    </form>
-  <% } %>
+        <% if (!state.won) { %>
+          <form method="POST" action="/guess" class="guess-form">
+            <label for="guess">Your guess</label>
+            <input type="number" id="guess" name="guess" min="<%= range.min %>" max="<%= range.max %>" required
+              autofocus>
+            <button type="submit">Guess</button>
+          </form>
+          <% } %>
 
-  <form method="POST" action="/reset" class="reset-form">
-    <button type="submit" class="reset-btn">
-      <%= state.won ? 'Play again' : 'Start over' %>
-    </button>
-  </form>
+            <form method="POST" action="/reset" class="reset-form">
+              <button type="submit" class="reset-btn">
+                <%= state.won ? 'Play again' : 'Start over' %>
+              </button>
+            </form>
 
-  <% if (state.history.length) { %>
-    <section class="history">
-      <h2>Previous guesses (<%= state.attempts %>)</h2>
-      <ul>
-        <% state.history.slice().reverse().forEach(function (h) { %>
-          <li>
-            <span class="num"><%= h.guess %></span>
-            <span class="hint hint-<%= h.hint %>"><%= h.hint %></span>
-          </li>
-        <% }) %>
-      </ul>
-    </section>
-  <% } %>
-</main>
+            <% if (state.history.length) { %>
+              <section class="history">
+                <h2>Previous guesses (<%= state.attempts %>)</h2>
+                <ul>
+                  <% state.history.slice().reverse().forEach(function (h) { %>
+                    <li>
+                      <span class="num">
+                        <%= h.guess %>
+                      </span>
+                      <span class="hint hint-<%= h.hint %>">
+                        <%= h.hint %>
+                      </span>
+                    </li>
+                    <% }) %>
+                </ul>
+              </section>
+              <% } %>
+  </main>
 
-<%- include('partials/footer') %>
+  <%- include('partials/footer') %>
